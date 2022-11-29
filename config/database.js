@@ -1,3 +1,7 @@
+require('dotenv').config()
+
 module.exports = {
-    url : "mongodb+srv://admin:admin@cluster0.dsyetgf.mongodb.net/sample_mflix?retryWrites=true&w=majority"
+    url : "mongodb+srv://admin:" + process.env.DB_PASS + 
+          "@cluster0.dsyetgf.mongodb.net/" + 
+          process.env.DATABASE + "?retryWrites=true&w=majority"
 };
