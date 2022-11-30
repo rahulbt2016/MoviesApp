@@ -11,6 +11,7 @@ MovieSchema = new Schema({
   poster: "String",
   title: "String",
   fullplot: "String",
+  languages: ["String"],
   countries: ["String"],
   released: "Date",
   directors: ["String"],
