@@ -83,13 +83,25 @@ app.get('/api/movies/:id', function(req, res) {
 //Insert a new movie to the db
 app.post('/api/movies', function(req, res) {
 	
-	let genres = null;
-	let cast = null;
+	let genres, cast, languages, countries, directors, writers;
 
 	if(req.body.genres)
 		genres = req.body.genres.split(",");
 
-	cast = req.body.cast.split(",");
+	if(req.body.cast)
+		cast = req.body.cast.split(",");
+
+	if(req.body.languages)
+		languages = req.body.cast.split(",");
+
+	if(req.body.countries)
+		countries = req.body.cast.split(",");
+	
+	if(req.body.directors)
+		directors = req.body.cast.split(",");
+
+	if(req.body.writers)
+		writers = req.body.cast.split(",");
 
 	Movie.create({
 		plot: req.body.plot,
@@ -97,45 +109,45 @@ app.post('/api/movies', function(req, res) {
 		runtime: req.body.runtime,
 		rated: req.body.rated,
 		cast: cast,
-		num_mflix_comments: 0,
-		poster: "jnjk",
-		title: "Rahul The God",
-		fullplot: "JBK",
-		languages: ["Hindi"],
-		countries: ["INDIA"],
-		released: "2022-11-01",
-		directors: ["RT"],
-		writers: ["RT"],
+		num_mflix_comments: req.body.num_mflix_comments,
+		poster: req.body.poster,
+		title: req.body.title,
+		fullplot: req.body.fullplot,
+		languages: languages,
+		countries: countries,
+		released: req.body.released,
+		directors: directors,
+		writers: writers,
 		awards: {
-		  wins: 1,
-		  nominations: 4,
-		  text: "Yoo"
+		  wins: req.body.awards_wins,
+		  nominations: req.body.awards_nominations,
+		  text: req.body.awards_text
 		},
-		lastupdated: "2022-11-01",
-		year: 2022,
+		lastupdated: req.body.lastUpdated,
+		year: req.body.year,
 		imdb: {
-		  rating: 4,
-		  votes: 400,
-		  id: 123
+		  rating: req.body.imdb_rating,
+		  votes: req.body.imdb_votes,
+		  id: req.body.imdb_id
 		},
-		type: "movie",
+		type: req.body.type,
 		tomatoes: {
 		  viewer: {
-			rating: 25,
-			numReviews: 500,
-			meter: 75
+			rating: req.body.tomatoes_viewer_rating,
+			numReviews: req.body.tomatoes_viewer_numReviews,
+			meter: req.body.tomatoes_viewer_meter
 		  },
-		  dvd: "2022-11-01",
+		  dvd: req.body.tomatoes_dvd,
 		  critic: {
-			rating: 4,
-			numReviews: 250,
-			meter: 55
+			rating: req.body.tomatoes_critic_rating,
+			numReviews: req.body.tomatoes_critic_numReviews,
+			meter: req.body.tomatoes_critic_meter
 		  },
-		  lastUpdated: "2022-11-01",
-		  consensus: "jkj",
-		  rotten: 1,
-		  production: "RT",
-		  fresh: 20
+		  lastUpdated: req.body.tomatoes_lastUpdated,
+		  consensus: req.body.tomatoes_consensus,
+		  rotten: req.body.tomatoes_rotten,
+		  production: req.body.tomatoes_production,
+		  fresh: req.body.tomatoes_fresh
 		}
 	}, function(err, movies) {
 		if (err)
