@@ -21,6 +21,9 @@ app.use(bodyParser.urlencoded({'extended':'true'}));            // parse applica
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 
+app.engine('.hbs', exphbs.engine({ extname: '.hbs'}));
+app.set('view engine', 'hbs');
+ 
 
 mongoose.connect(database.url)
 .then(() => {
@@ -251,6 +254,12 @@ app.delete('/api/movies/:Id',function(req,res)
     })
     .catch((err) => res.send(err));
 
+});
+
+//Render Insert Movie Form
+app.get('/addMovie', (req, res) => {
+
+	res.render('addMovieForm');
 });
 
 
