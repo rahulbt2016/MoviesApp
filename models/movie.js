@@ -10,6 +10,7 @@ MovieSchema = new Schema({
   num_mflix_comments: "Number",
   poster: "String",
   title: "String",
+  metacritic: "Number",
   fullplot: "String",
   languages: ["String"],
   countries: ["String"],
@@ -42,6 +43,8 @@ MovieSchema = new Schema({
       meter: "Number"
     },
     lastUpdated: "Date",
+    boxOffice: "String",
+    website: "String",
     consensus: "String",
     rotten: "Number",
     production: "String",

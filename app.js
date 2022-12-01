@@ -112,6 +112,7 @@ app.post('/api/movies', function(req, res) {
 		num_mflix_comments: req.body.num_mflix_comments,
 		poster: req.body.poster,
 		title: req.body.title,
+		metacritic: req.body.metacritic,
 		fullplot: req.body.fullplot,
 		languages: languages,
 		countries: countries,
@@ -144,6 +145,8 @@ app.post('/api/movies', function(req, res) {
 			meter: req.body.tomatoes_critic_meter
 		  },
 		  lastUpdated: req.body.tomatoes_lastUpdated,
+		  boxOffice: req.body.tomatoes_boxOffice,
+		  website: req.body.tomatoes_website,
 		  consensus: req.body.tomatoes_consensus,
 		  rotten: req.body.tomatoes_rotten,
 		  production: req.body.tomatoes_production,
@@ -187,6 +190,7 @@ app.put('/api/movies/:Id', function(req, res) {
 	num_mflix_comments: req.body.num_mflix_comments,
 	poster: req.body.poster,
 	title: req.body.title,
+	metacritic: req.body.metacritic,
 	fullplot: req.body.fullplot,
 	languages: languages,
 	countries: countries,
@@ -219,6 +223,8 @@ app.put('/api/movies/:Id', function(req, res) {
 		meter: req.body.tomatoes_critic_meter
 	  },
 	  lastUpdated: req.body.tomatoes_lastUpdated,
+	  boxOffice: req.body.tomatoes_boxOffice,
+	  website: req.body.tomatoes_website,
 	  consensus: req.body.tomatoes_consensus,
 	  rotten: req.body.tomatoes_rotten,
 	  production: req.body.tomatoes_production,
