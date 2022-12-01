@@ -12,6 +12,12 @@ header {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
+#logo-img {
+    float: left;
+    height: 120px;
+    width: 140px;
+}
+
 main {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -29,103 +35,3 @@ footer a {
     color: white;
     font-size: 18px;
 }
-
-#book-data-table td {
-    padding-left: 30px;
-    padding-bottom: 30px;
-}
-
-#all-book-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-
-#all-book-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
-}
-
-#all-book-table th,
-#all-book-table td {
-    padding: 12px 15px;
-}
-
-#all-book-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-#all-book-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-#all-book-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
-}
-
-#all-book-table tbody tr.active-row {
-    font-weight: bold;
-    color: red;
-    background-color: yellow;
-}
-
-nav {
-    display: flex; 
-    justify-content: space-between; 
-    padding: 1rem 2rem; 
-    background: dimgray;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.5); 
-  }
-  
-nav ul {
-display: flex;
-list-style: none;
-}
-
-nav li {
-padding-left: 4rem;
-}
-
-nav li a {
-color: white;
-text-decoration: none;
-font-weight: bold;
-font-size: 16px;
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-nav ul li a,
-nav ul li a:after,
-nav ul li a:before {
-transition: all .5s;
-}
-
-nav ul li a:hover {
-color: burlywood;
-}
-
-form {
-	
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    
-}
-
-  @media only screen and (max-width: 850px) {
-    nav {
-      flex-direction: column;
-    }
-    nav ul {
-      flex-direction: column;
-      padding-top: 0.5rem;
-    }
-    nav li {
-      padding: 0.5rem 0;
-    }
-  } 

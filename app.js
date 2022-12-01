@@ -259,7 +259,7 @@ app.delete('/api/movies/:Id',function(req,res)
 //Render Insert Movie Form
 app.get('/addMovie', (req, res) => {
 
-	res.render('addMovieForm');
+	res.render('addMovieForm', {title: "Movies App - Add Movie"});
 });
 
 
