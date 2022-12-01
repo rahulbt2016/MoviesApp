@@ -92,16 +92,16 @@ app.post('/api/movies', function(req, res) {
 		cast = req.body.cast.split(",");
 
 	if(req.body.languages)
-		languages = req.body.cast.split(",");
+		languages = req.body.languages.split(",");
 
 	if(req.body.countries)
-		countries = req.body.cast.split(",");
+		countries = req.body.countries.split(",");
 	
 	if(req.body.directors)
-		directors = req.body.cast.split(",");
+		directors = req.body.directors.split(",");
 
 	if(req.body.writers)
-		writers = req.body.cast.split(",");
+		writers = req.body.writers.split(",");
 
 	Movie.create({
 		plot: req.body.plot,
@@ -152,8 +152,99 @@ app.post('/api/movies', function(req, res) {
 	}, function(err, movies) {
 		if (err)
 			res.send(err)
-		res.send("Inserted!");
+		res.send("Successful! Movie has been Inserted.");
 	});
+});
+
+app.put('/api/movies/:Id', function(req, res) {
+	// create mongose method to update an existing record into collection
+	let genres, cast, languages, countries, directors, writers;
+
+	if(req.body.genres)
+		genres = req.body.genres.split(",");
+
+	if(req.body.cast)
+		cast = req.body.cast.split(",");
+
+	if(req.body.languages)
+		languages = req.body.languages.split(",");
+
+	if(req.body.countries)
+		countries = req.body.countries.split(",");
+	
+	if(req.body.directors)
+		directors = req.body.directors.split(",");
+
+	if(req.body.writers)
+		writers = req.body.writers.split(",");
+
+	let data = 
+	{plot: req.body.plot,
+	genres: genres,
+	runtime: req.body.runtime,
+	rated: req.body.rated,
+	cast: cast,
+	num_mflix_comments: req.body.num_mflix_comments,
+	poster: req.body.poster,
+	title: req.body.title,
+	fullplot: req.body.fullplot,
+	languages: languages,
+	countries: countries,
+	released: req.body.released,
+	directors: directors,
+	writers: writers,
+	awards: {
+	  wins: req.body.awards_wins,
+	  nominations: req.body.awards_nominations,
+	  text: req.body.awards_text
+	},
+	lastupdated: req.body.lastUpdated,
+	year: req.body.year,
+	imdb: {
+	  rating: req.body.imdb_rating,
+	  votes: req.body.imdb_votes,
+	  id: req.body.imdb_id
+	},
+	type: req.body.type,
+	tomatoes: {
+	  viewer: {
+		rating: req.body.tomatoes_viewer_rating,
+		numReviews: req.body.tomatoes_viewer_numReviews,
+		meter: req.body.tomatoes_viewer_meter
+	  },
+	  dvd: req.body.tomatoes_dvd,
+	  critic: {
+		rating: req.body.tomatoes_critic_rating,
+		numReviews: req.body.tomatoes_critic_numReviews,
+		meter: req.body.tomatoes_critic_meter
+	  },
+	  lastUpdated: req.body.tomatoes_lastUpdated,
+	  consensus: req.body.tomatoes_consensus,
+	  rotten: req.body.tomatoes_rotten,
+	  production: req.body.tomatoes_production,
+	  fresh: req.body.tomatoes_fresh
+	}
+}
+
+	// save the movie
+	Movie.findByIdAndUpdate({_id:req.params.Id}, data).then(function(err, movie) {
+	
+
+	res.send('Successful! Movie has been Updated.');
+	}).catch((err) => res.send(err));
+});
+
+
+
+app.delete('/api/movies/:Id',function(req,res)
+{
+    Movie.findByIdAndRemove({_id:req.params.Id}).then(function(result)
+    {
+        console.log(result.toString());
+        res.send('Successful! Movie has been Deleted.');
+    })
+    .catch((err) => res.send(err));
+
 });
 
 
