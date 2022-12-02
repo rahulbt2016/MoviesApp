@@ -15,6 +15,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+const fetch = require('cross-fetch');
+
 
 var port     = process.env.PORT || 8000;
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
@@ -157,8 +159,8 @@ app.post('/api/movies', function(req, res) {
 		}
 	}, function(err, movies) {
 		if (err)
-			res.send(err)
-		res.send("Successful! Movie has been Inserted.");
+			res.render('error', { title: 'Error', message:'Something went wrong! Please try again later' });
+		res.redirect('/');
 	});
 });
 
@@ -260,6 +262,53 @@ app.delete('/api/movies/:Id',function(req,res)
 app.get('/addMovie', (req, res) => {
 
 	res.render('addMovieForm', {title: "Movies App - Add Movie"});
+});
+
+//Render Show Movies Page
+app.get('/', function(req, res) {
+	
+	let page = req.query.page;
+	let perPage = req.query.perPage;
+	let title = req.query.title;
+	
+	if(!page) {
+		page = 0;
+	}
+
+	if(!perPage) {
+		perPage = 10;
+	}
+
+	if(!title) {
+		title = "";
+	}
+
+	let regex = new RegExp(title, "i");
+
+	let filter = {title: regex};
+
+	Movie.find(filter).count((err, count) => {
+
+		let url = req.protocol + "://" + req.headers.host + "/api/movies?perPage=" 
+				+ perPage + "&page=" + page + "&title=" + title;
+
+		fetch(url)
+		.then((response) => response.json())
+		.then((jsonData) => {
+			
+			res.render('showMovies', {data: jsonData, totalPages: (Math.ceil(count/perPage) - 1)});
+		})
+		.catch(function (err) {
+			console.log("Unable to fetch -", err);
+			res.render('error', { title: 'Error', message:'Something went wrong! Please try again later' });
+		});
+	});
+
+});
+
+//Wrong route
+app.get('*', function(req, res) {
+	res.status(404).render('error', { title: 'Error', message:'Wrong Route' });   //Render error.hbs
 });
 
 
