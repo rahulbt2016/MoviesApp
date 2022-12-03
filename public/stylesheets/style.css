@@ -418,4 +418,21 @@ width: 100px;
   margin-left: -20px;
 }
 
+.mt-100{margin-top: 100px}
+div.awards{
+    margin-left: 20px;
+}
+div.imdb{
+    margin-left: 20px;
+}
+
+div.tomatoes{
+    margin-left: 20px;
+}
+div.critic{
+    margin-left: 20px;
+}
+div.viewer{
+    margin-left: 20px;
+}
 
