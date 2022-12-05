@@ -311,7 +311,7 @@ app.get('/', function(req, res) {
 		})
 		.catch(function (err) {
 			console.log("Unable to fetch -", err);
-			res.render('error', { title: 'Error', message:'Something went wrong! Please try again later' });
+			res.render('error', { title: 'Error', message:err });
 		});
 	});
 
