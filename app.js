@@ -300,9 +300,15 @@ app.get('/', function(req, res) {
 
 	Movie.find(filter).count((err, count) => {
 
-		let url = "https://" + req.headers.host + "/api/movies?perPage=" 
+		let url = "://" + req.headers.host + "/api/movies?perPage=" 
 				+ perPage + "&page=" + page + "&title=" + title;
 
+		if(req.headers.host == "localhost:" + port)
+			url = "http" + url;
+		else 
+			url = "https" + url;
+
+		
 		fetch(url)
 		.then((response) => response.json())
 		.then((jsonData) => {
