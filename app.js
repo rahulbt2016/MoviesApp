@@ -300,7 +300,7 @@ app.get('/', function(req, res) {
 
 	Movie.find(filter).count((err, count) => {
 
-		let url = /*req.protocol + "://" + */req.headers.host + "/api/movies?perPage=" 
+		let url = "https://" + req.headers.host + "/api/movies?perPage=" 
 				+ perPage + "&page=" + page + "&title=" + title;
 
 		fetch(url)
