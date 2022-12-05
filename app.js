@@ -264,6 +264,17 @@ app.get('/addMovie', (req, res) => {
 	res.render('addMovieForm', {title: "Movies App - Add Movie"});
 });
 
+//Render Update Movie Form
+app.get('/updateMovie/:id', (req, res) => {
+	let id = req.params.id;
+	Movie.findById(id, function(err, book) {
+		if (err)
+			res.render('error', { title: 'Error', message:'Something went wrong! Please try again later' });
+ 
+		res.render('updateMovieForm', {title: "Movies App - Update Movie", data: JSON.parse(JSON.stringify(book))});
+	});
+});
+
 //Render Show Movies Page
 app.get('/', function(req, res) {
 	

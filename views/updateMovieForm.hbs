@@ -1,54 +1,71 @@
 <h1>
-    <center>Add Movie Form</center>
+    <center>Update Movie Form</center>
 </h1>
 
 <form>
-
     <div class="form-group">
         <label for="title">Movie Title:</label>
-        <input type="text" class="form-control" name="title" placeholder="Enter movie title">
+        <input type="text" class="form-control" name="title" placeholder="Enter movie title" value="{{data.title}}">
         <br>
         <label for="plot">Movie Plot:</label>
-        <input type="text" class="form-control" name="plot" placeholder="Enter movie plot">
+        <input type="text" class="form-control" name="plot" placeholder="Enter movie plot" value="{{data.plot}}">
         <br>
         <label for="fullplot">Movie Fullplot:</label>
-        <input type="text" class="form-control" name="fullplot" placeholder="Enter movie fullplot">
+        <input type="text" class="form-control" name="fullplot" placeholder="Enter movie fullplot" value="{{data.fullplot}}">
         <br>
         <label for="poster">Movie Poster:</label>
-        <input type="text" class="form-control" name="poster" placeholder="Enter movie poster">
+        <input type="text" class="form-control" name="poster" placeholder="Enter movie poster" value="{{data.poster}}">
         <br>
         <label for="genres">Genres:</label>
-        <select id="choices-multiple-remove-button" name="genres" placeholder="Select upto 5 genres" multiple>
+        <select id="choices-multiple-remove-button" name="genres" placeholder="Select upto 5 genres" multiple >
             <script>
+                let genres = "{{data.genres}}";
+                genres = genres.split(",")
                 genresList = ["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", 
                 "Documentary" ,"Drama","Family","Fantasy", "Film-Noir",  "History", "Horror", "Music", "Musical", "Mystery", "Romance",
                 "Sci-Fi", "Short", "Sport", "Thriller", "War", "Western" ];
-                
+
                 for(let i = 0; i < genresList.length; i++) {
-					
-					document.write("<option value='" + genresList[i] + "'>" + genresList[i] + "</option>");    
+
+                    for(let j = 0; j < genres.length; j++) {
+                         flag = false;
+
+                        if(genresList[i] == genres[j]){
+                            
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if(flag) 
+                        document.write("<option value='" + genresList[i] + "' selected>" + genresList[i] + "</option>");
+                    else
+                        document.write("<option value='" + genresList[i] + "'>" + genresList[i] + "</option>");
+                            
                 }
             </script>
         </select>
-
         <label for="runtime">Movie Runtime:</label>
-        <input type="number" class="form-control" name="runtime" placeholder="Enter movie runtime">
+        <input type="number" class="form-control" name="runtime" placeholder="Enter movie runtime" value="{{data.runtime}}">
         <br>
         <label for="rated">Movie Rated:</label>
-        <input type="text" class="form-control" name="rated" placeholder="Enter movie rated">
+        <input type="text" class="form-control" name="rated" placeholder="Enter movie rated" value="{{data.rated}}">
         <br>
         <label for="cast">Movie Cast:</label>
-        <input type="text" class="form-control" name="cast" placeholder="Enter movie cast">
+        <input type="text" class="form-control" name="cast" placeholder="Enter movie cast" value="{{data.cast}}">
         <br>
         <label for="mflix_commemts">Movie mflix comments:</label>
-        <input type="number" class="form-control" name="num_mflix_comments" placeholder="Enter movie mflix comments">
+        <input type="number" class="form-control" name="num_mflix_comments" placeholder="Enter movie mflix comments" value="{{data.num_mflix_comments}}">
         <br>
         <label for="metacritic">Movie metacritic:</label>
-        <input type="number" class="form-control" name="metacritic" placeholder="Enter movie metacritic">
+        <input type="number" class="form-control" name="metacritic" placeholder="Enter movie metacritic" value="{{data.metacritic}}">
         <br>
         <label for="countries">Countries:</label>
         <select id="choices-multiple-remove-button" name="countries" placeholder="Select upto 5 countries" multiple>
+
             <script>
+                let countries = "{{data.countries}}";
+                countries = countries.split(",")
                 countriesList = ['Afghanistan', 'Akrotiri', 'Albania', 'Algeria', 'American Samoa', 
                                 'Andorra', 'Angola', 'Anguilla', 'Antarctica', 'Antigua and Barbuda', 
                                 'Argentina', 'Armenia', 'Aruba', 'Ashmore and Cartier Islands', 'Australia', 
@@ -87,17 +104,33 @@
                                 'Tromelin Island', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'UK', 
                                 'USA', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela', 'Vietnam', 'Virgin Islands', 'Wake Island', 'Wallis and Futuna', 'West Bank', 'West Germany', 'Western Sahara', 
                                 'Yemen', 'Yugoslavia', 'Zambia', 'Zimbabwe'];
-
                 for(let i = 0; i < countriesList.length; i++) {
-					
-					document.write("<option value='" + countriesList[i] + "'>" + countriesList[i] + "</option>");
+
+                    for(let j = 0; j < countries.length; j++) {
+                         flag = false;
+
+                        if(countriesList[i] == countries[j]){
+                            
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if(flag) 
+                        document.write("<option value='" + countriesList[i] + "' selected>" + countriesList[i] + "</option>");
+                    else
+                        document.write("<option value='" + countriesList[i] + "'>" + countriesList[i] + "</option>");
+                            
                 }
             </script>
+            
         </select>
 
         <label for="languanges">Languages:</label>
         <select id="choices-multiple-remove-button" name="languages" placeholder="Select upto 5 languages" multiple>
             <script>
+                let languanges = "{{data.languages}}";
+                languanges = languanges.split(",")
                 languangesList = ["Abkhazian", "Afar", "Afrikaans", "Akan", "Albanian", "Amharic", "Arabic", 
 								"Aragonese", "Armenian", "Assamese", "Avaric", "Avestan", "Aymara", 
 								"Azerbaijani", "Bambara", "Bashkir", "Basque","Belarusian","Bengali", 
@@ -134,110 +167,144 @@
 								"Twi", "Uighur, Uyghur", "Ukrainian", "Urdu", "Uzbek", "Venda", "Vietnamese", 
 								"Volap_k", "Walloon", "Welsh", "Western Frisian", "Wolof", "Xhosa", "Yiddish", 
 								"Yoruba", "Zhuang, Chuang", "Zulu"];
-												
-				for(let i = 0; i < languangesList.length; i++) {
-				
-					document.write("<option value='" + languangesList[i] + "'>" + languangesList[i] + "</option>");
-				}
+
+                for(let i = 0; i < languangesList.length; i++) {
+
+                    for(let j = 0; j < languanges.length; j++) {
+                         flag = false;
+
+                        if(languangesList[i] == languanges[j]){
+                            
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if(flag) 
+                        document.write("<option value='" + languangesList[i] + "' selected>" + languangesList[i] + "</option>");
+                    else
+                        document.write("<option value='" + languangesList[i] + "'>" + languangesList[i] + "</option>");
+                            
+                }
             </script>
         </select>
         <label for="type">Movie Released date:</label>
-        <input type="date" id="date" class="form-control" name="released" >
+        <script>
+            let releaseDate = "{{data.released}}";
+            releaseDate = releaseDate.split("T")[0];
+
+            document.write("<input type='date' id='date' class='form-control' name='released' value='" + releaseDate + "''>");
+        </script>
         <br>
         <label for="type">Movie Directors:</label>
-        <input type="text" class="form-control" name="directors" placeholder="Enter movie directors">
+        <input type="text" class="form-control" name="directors" placeholder="Enter movie directors" value="{{data.directors}}">
         <br>
         <label for="type">Movie Writers:</label>
-        <input type="text" class="form-control" name="writers" placeholder="Enter movie writers">
+        <input type="text" class="form-control" name="writers" placeholder="Enter movie writers" value="{{data.writers}}">
         <br>
        <label for="type">Movie Awards</label>
             <div class="awards">
 
                 <label for="type">Movie Wins:</label>
-                <input type="number" class="form-control" name="awards_wins" placeholder="Enter movie wins">
+                <input type="number" class="form-control" name="awards_wins" placeholder="Enter movie wins" value="{{data.awards.wins}}">
                 <label for="type">Movie Nominations:</label>
-                <input type="number" class="form-control" name="awards_nominations" placeholder="Enter movie nominations">
+                <input type="number" class="form-control" name="awards_nominations" placeholder="Enter movie nominations" value="{{data.awards.nominations}}">
                 <label for="type">Movie Text:</label>
-                <input type="text" class="form-control" name="awards_text" placeholder="Enter movie text">
+                <input type="text" class="form-control" name="awards_text" placeholder="Enter movie text" value="{{data.awards.text}}">
             </div>
         </div>
         <br>
 
         <label for="type">Movie last updated date:</label>
-        <input type="date" id="date1" class="form-control" name="lastUpdated">
+        <script>
+            let lastUpdatedDate = "{{data.lastupdated}}";
+            lastUpdatedDate = lastUpdatedDate.split("T")[0];
+
+            document.write("<input type='date' id='date1' class='form-control' name='lastUpdated' value='" + lastUpdatedDate + "''>");
+        </script>
         <br>
         <label for="type">Movie year</label>
-        <input type="number" class="form-control" name="year" placeholder="Enter movie year">
+        <input type="number" class="form-control" name="year" placeholder="Enter movie year" value="{{data.year}}">
         <br>
 
         <label for="type">Movie Imdb</label>
         <div class="imdb">
             <label for="type">Movie imdb rating:</label>
-            <input type="number" class="form-control" name="imdb_rating" placeholder="Enter movie imdb rating">
+            <input type="number" class="form-control" name="imdb_rating" placeholder="Enter movie imdb rating" value="{{data.imdb.rating}}">
             <label for="type">Movie votes:</label>
-            <input type="number" class="form-control" name="imdb_votes" placeholder="Enter movie votes">
+            <input type="number" class="form-control" name="imdb_votes" placeholder="Enter movie votes" value="{{data.imdb.votes}}">
             <label for="type">Movie id:</label>
-            <input type="number" class="form-control" name="imdb_id" placeholder="Enter movie id">
+            <input type="number" class="form-control" name="imdb_id" placeholder="Enter movie id" value="{{data.imdb.id}}">
         </div>
         <br>
 
         <label for="type">Movie Type:</label>
-        <input type="text" class="form-control" name="type" placeholder="Enter movie type">
+        <input type="text" class="form-control" name="type" placeholder="Enter movie type" value="{{data.type}}">
         <br>
         <label for="type">Movie tomatoes</label>
 
         <div class="tomatoes">
             <br>
             <label for="type">Movie tomatoes last updated date:</label>
-            <input type="date" id="date2" class="form-control" name="tomatoes_lastUpdated" placeholder="Enter movie tomatoes last updated date">
-            
+            <script>
+                let tomatoesLastUpdatedDate = "{{data.tomatoes.lastUpdated}}";
+                tomatoesLastUpdatedDate = tomatoesLastUpdatedDate.split("T")[0];
+
+                document.write("<input type='date' id='date2' class='form-control' name='tomatoes_lastUpdated' value='" + tomatoesLastUpdatedDate + "''>");
+            </script>
+
             <br>
             <label for="type">Movie viewer</label>
             <div class="viewer">
                 <label for="type">Movie rating:</label>
-                <input type="number" class="form-control" name="tomatoes_viewer_rating" placeholder="Enter movie rating">
+                <input type="number" class="form-control" name="tomatoes_viewer_rating" placeholder="Enter movie rating" value="{{data.tomatoes.viewer.rating}}">
                 <label for="type">Movie numReviews:</label>
-                <input type="number" class="form-control" name="tomatoes_viewer_numReviews" placeholder="Enter movie numReviews">
+                <input type="number" class="form-control" name="tomatoes_viewer_numReviews" placeholder="Enter movie numReviews" value="{{data.tomatoes.viewer.numReviews}}">
                 <label for="type">Movie meter:</label>
-                <input type="number" class="form-control" name="tomatoes_viewer_meter" placeholder="Enter movie meter">
+                <input type="number" class="form-control" name="tomatoes_viewer_meter" placeholder="Enter movie meter" value="{{data.tomatoes.viewer.meter}}">
             </div>
 <br>
             <label for="type">Movie critic</label>
             <div class="critic">
                 <label for="type">Movie rating:</label>
-                <input type="number" class="form-control" name="tomatoes_critic_rating" placeholder="Enter movie rating">
+                <input type="number" class="form-control" name="tomatoes_critic_rating" placeholder="Enter movie rating" value="{{data.tomatoes.critic.rating}}">
                 <label for="type">Movie numReviews:</label>
-                <input type="number" class="form-control" name="tomatoes_critic_numReviews" placeholder="Enter movie numReviews">
+                <input type="number" class="form-control" name="tomatoes_critic_numReviews" placeholder="Enter movie numReviews" value="{{data.tomatoes.critic.numReviews}}">
                 <label for="type">Movie meter:</label>
-                <input type="number" class="form-control" name="tomatoes_critic_meter" placeholder="Enter movie meter">
+                <input type="number" class="form-control" name="tomatoes_critic_meter" placeholder="Enter movie meter" value="{{data.tomatoes.critic.meter}}">
             </div>
 <br>
             
             <label for="type">Movie tomatoes dvd:</label>
-            <input type="date" id="date3" class="form-control" name="tomatoes_dvd" placeholder="Enter movie dvd">
+            <script>
+                let tomatoesDvd = "{{data.tomatoes.dvd}}";
+                tomatoesDvd = tomatoesDvd.split("T")[0];
+
+                document.write("<input type='date' id='date3' class='form-control' name='tomatoes_dvd' value='" + tomatoesDvd + "''>");
+            </script>
             <br>
             <label for="type">Movie boxOffice:</label>
-            <input type="text" class="form-control" name="tomatoes_boxOffice" placeholder="Enter movie boxOffice">
+            <input type="text" class="form-control" name="tomatoes_boxOffice" placeholder="Enter movie boxOffice" value="{{data.tomatoes.boxOffice}}">
             <br>
             <label for="type">Movie website:</label>
-            <input type="text" class="form-control" name="tomatoes_website" placeholder="Enter movie website">
+            <input type="text" class="form-control" name="tomatoes_website" placeholder="Enter movie website" value="{{data.tomatoes.website}}">
             <br>
             <label for="type">Movie consensus:</label>
-            <input type="text" class="form-control" name="tomatoes_consensus" placeholder="Enter movie consensus">
+            <input type="text" class="form-control" name="tomatoes_consensus" placeholder="Enter movie consensus" value="{{data.tomatoes.consensus}}">
             <br>
             <label for="type">Movie rotten:</label>
-            <input type="number" class="form-control" name="tomatoes_rotten" placeholder="Enter movie rotten">
+            <input type="number" class="form-control" name="tomatoes_rotten" placeholder="Enter movie rotten" value="{{data.tomatoes.rotten}}">
             <br>
             <label for="type">Movie production:</label>
-            <input type="text" class="form-control" name="tomatoes_production" placeholder="Enter movie production">
+            <input type="text" class="form-control" name="tomatoes_production" placeholder="Enter movie production" value="{{data.tomatoes.production}}">
             <br>
             <label for="type">Movie fresh:</label>
-            <input type="number" class="form-control" name="tomatoes_fresh" placeholder="Enter movie fresh">
+            <input type="number" class="form-control" name="tomatoes_fresh" placeholder="Enter movie fresh" value="{{data.tomatoes.fresh}}">
             <br>
         </div>
     </div>
     
 
     <br>
-    <input type="button" class="btn btn-primary" id="add-movie-form-btn" value="Add Movie">
+    <input type="button" class="btn btn-primary" id="update-movie-form-btn" value="Update Movie">
 </form>

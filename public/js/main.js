@@ -77,13 +77,15 @@ $( document ).ready(function() {
 
     $(".update-movie-btn").click(function() {
         
+        let movie_id = $(this).children("p").html()
+        window.location.replace("/updateMovie/" + movie_id);
     });
 
     var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
         removeItemButton: true,
-        maxItemCount:10,
-        searchResultLimit:10,
-        renderChoiceLimit:10
+        //maxItemCount:10,
+        //searchResultLimit:10,
+        //renderChoiceLimit:10
       }); 
  
       var now = new Date();
@@ -93,14 +95,20 @@ $( document ).ready(function() {
   
       var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
   
-  
-     $('#date').val(today); 
-     $('#date1').val(today); 
-     $('#date2').val(today); 
-     $('#date3').val(today); 
+    if($('#date').val()=='')
+        $('#date').val(today); 
+    
+    if($('#date1').val()=='')
+        $('#date1').val(today); 
+    
+    if($('#date2').val()=='')
+        $('#date2').val(today); 
+    
+    if($('#date3').val()=='')
+        $('#date3').val(today); 
 
      $("#add-movie-form-btn").click(function(){
-        
+
         if(confirm("Add movie?")) {
 
             $.ajax({
@@ -108,7 +116,45 @@ $( document ).ready(function() {
                 type: 'POST',
                 data: {
                     title : $("[name='title']").val(),
-                    countries : $("[name='countries']").val().toString()
+                    plot : $("[name='plot']").val(),
+                    fullplot : $("[name='fullplot']").val(),
+                    poster : $("[name='poster']").val(),
+                    genres : $("[name='genres']").val().toString(),
+                    runtime : $("[name='runtime']").val(),
+                    rated : $("[name='rated']").val(),
+                    cast : $("[name='cast']").val(),
+                    num_mflix_comments : $("[name='num_mflix_comments']").val(),
+                    metacritic : $("[name='metacritic']").val(),
+                    countries : $("[name='countries']").val().toString(),
+                    languages : $("[name='languages']").val().toString(),
+                    released : $("[name='released']").val(),
+                    directors : $("[name='directors']").val(),
+                    writers : $("[name='writers']").val(),
+                    awards_wins : $("[name='awards_wins']").val(),
+                    awards_nominations : $("[name='awards_nominations']").val(),
+                    awards_text : $("[name='awards_text']").val(),
+                    lastUpdated : $("[name='lastUpdated']").val(),
+                    year : $("[name='year']").val(),
+                    imdb_rating : $("[name='imdb_rating']").val(),
+                    imdb_votes : $("[name='imdb_votes']").val(),
+                    imdb_id : $("[name='imdb_id']").val(),
+                    type : $("[name='type']").val(),
+                    tomatoes_lastUpdated : $("[name='tomatoes_lastUpdated']").val(),
+                    tomatoes_viewer_rating : $("[name='tomatoes_viewer_rating']").val(),
+                    tomatoes_viewer_numReviews : $("[name='tomatoes_viewer_numReviews']").val(),
+                    tomatoes_viewer_meter : $("[name='tomatoes_viewer_meter']").val(),
+                    tomatoes_critic_rating : $("[name='tomatoes_critic_rating']").val(),
+                    tomatoes_critic_numReviews : $("[name='tomatoes_critic_numReviews']").val(),
+                    tomatoes_critic_meter : $("[name='tomatoes_critic_meter']").val(),
+                    tomatoes_viewer_rating : $("[name='tomatoes_viewer_rating']").val(),
+                    tomatoes_viewer_numReviews : $("[name='tomatoes_viewer_numReviews']").val(),
+                    tomatoes_dvd : $("[name='tomatoes_dvd']").val(),
+                    tomatoes_boxOffice : $("[name='tomatoes_boxOffice']").val(),
+                    tomatoes_website : $("[name='tomatoes_website']").val(),
+                    tomatoes_consensus: $("[name='tomatoes_consensus']").val(),
+                    tomatoes_rotten : $("[name='tomatoes_rotten']").val(),
+                    tomatoes_production : $("[name='tomatoes_production']").val(),
+                    tomatoes_fresh : $("[name='tomatoes_fresh']").val(),
                 },
                 success: function(result) {
                     alert("Movie added successfully!");
@@ -118,5 +164,65 @@ $( document ).ready(function() {
         }
 
      });
+
+    $("#update-movie-form-btn").click(function(){
+
+        if(confirm("Update movie?")) {
+
+            let movieId = window.location.pathname.split("/").pop();
+
+            $.ajax({
+                url: '/api/movies/' + movieId,
+                type: 'PUT',
+                data: {
+                    title : $("[name='title']").val(),
+                    plot : $("[name='plot']").val(),
+                    fullplot : $("[name='fullplot']").val(),
+                    poster : $("[name='poster']").val(),
+                    genres : $("[name='genres']").val().toString(),
+                    runtime : $("[name='runtime']").val(),
+                    rated : $("[name='rated']").val(),
+                    cast : $("[name='cast']").val(),
+                    num_mflix_comments : $("[name='num_mflix_comments']").val(),
+                    metacritic : $("[name='metacritic']").val(),
+                    countries : $("[name='countries']").val().toString(),
+                    languages : $("[name='languages']").val().toString(),
+                    released : $("[name='released']").val(),
+                    directors : $("[name='directors']").val(),
+                    writers : $("[name='writers']").val(),
+                    awards_wins : $("[name='awards_wins']").val(),
+                    awards_nominations : $("[name='awards_nominations']").val(),
+                    awards_text : $("[name='awards_text']").val(),
+                    lastUpdated : $("[name='lastUpdated']").val(),
+                    year : $("[name='year']").val(),
+                    imdb_rating : $("[name='imdb_rating']").val(),
+                    imdb_votes : $("[name='imdb_votes']").val(),
+                    imdb_id : $("[name='imdb_id']").val(),
+                    type : $("[name='type']").val(),
+                    tomatoes_lastUpdated : $("[name='tomatoes_lastUpdated']").val(),
+                    tomatoes_viewer_rating : $("[name='tomatoes_viewer_rating']").val(),
+                    tomatoes_viewer_numReviews : $("[name='tomatoes_viewer_numReviews']").val(),
+                    tomatoes_viewer_meter : $("[name='tomatoes_viewer_meter']").val(),
+                    tomatoes_critic_rating : $("[name='tomatoes_critic_rating']").val(),
+                    tomatoes_critic_numReviews : $("[name='tomatoes_critic_numReviews']").val(),
+                    tomatoes_critic_meter : $("[name='tomatoes_critic_meter']").val(),
+                    tomatoes_viewer_rating : $("[name='tomatoes_viewer_rating']").val(),
+                    tomatoes_viewer_numReviews : $("[name='tomatoes_viewer_numReviews']").val(),
+                    tomatoes_dvd : $("[name='tomatoes_dvd']").val(),
+                    tomatoes_boxOffice : $("[name='tomatoes_boxOffice']").val(),
+                    tomatoes_website : $("[name='tomatoes_website']").val(),
+                    tomatoes_consensus: $("[name='tomatoes_consensus']").val(),
+                    tomatoes_rotten : $("[name='tomatoes_rotten']").val(),
+                    tomatoes_production : $("[name='tomatoes_production']").val(),
+                    tomatoes_fresh : $("[name='tomatoes_fresh']").val(),
+                },
+                success: function(result) {
+                    alert("Movie updated successfully!");
+                    window.location.replace("/");
+                }
+            });
+        }
+
+    });
 
 });
