@@ -1,0 +1,144 @@
+<div class="wrapper">
+    <div class="main_card">
+        <div class="card_left">
+            <div class="card_datails">
+                <h1>{{data.title}}</h1>
+                <div class="card_cat">
+
+                    <span class="time"><i class="fa fa-clock-o">&nbsp</i> {{data.runtime}} mins</span>
+                    <span class="year"> <i class="fa fa-calendar">&nbsp</i>
+                         <script>
+                                releaseDate = "{{ data.released }}";
+
+                                releaseDate = new Date(releaseDate)
+                                document.write(releaseDate.toDateString());
+                            </script>
+                    </span>
+                    <span class="rated">{{data.rated}}</span>
+                </div>
+                <span class="genre"> 
+                    {{#each data.genres}} 
+                       <span class="badge1 badge"> {{this}} </span> &nbsp; &nbsp;
+                    {{/each}}
+                </span>
+                <hr>
+
+                <div class="social-btn">
+                    <i class="fa fa-imdb"></i>&nbsp<b>IMDB</b><br><br>
+                    <span class="id"> ID: {{data.imdb.id}}</span>
+                    <span class="rating"> <i class="fa fa-star"></i>&nbsp : {{data.imdb.rating}}/10</span>
+                    <span class="votes">Votes: {{data.imdb.votes}}</span>
+                </div>
+
+                 <div class="social-btn">
+                   <img src="/images/tomatoes.png" id="tomatoes-img"></a></i></i>&nbsp<b>Rotten Tomatoes</b><br><br>
+                   <span class="rating"> <i class="fa fa-star"></i>&nbsp : {{data.tomatoes.viewer.rating}}/10</span>
+                    <span class="reviews"> Reviewed By: {{data.tomatoes.viewer.numReviews}}</span>
+                    <span class="meter">Meter: {{data.tomatoes.viewer.meter}}</span>
+                    <span class="dvd"> DVD:
+                        
+                        {{#if data.tomatoes.dvd }}
+                            <script>
+
+                                releaseDate = "{{ data.tomatoes.dvd }}";
+
+                                releaseDate = new Date(releaseDate)
+                                document.write(releaseDate.toDateString());
+                            
+                                
+                            </script>
+                        {{/if}}
+
+                        {{#unless data.tomatoes.dvd }}
+                        -
+                        {{/unless}}
+                        
+                    </span>
+                </div>
+
+                <hr>
+                <br>
+                 <div class="social-btn">
+                <p class="disc"><b>{{data.fullplot}}</b></p>
+                </div>
+                <hr>
+                <div class="social-btn">
+                    
+                    <table>
+                        <tr>
+                            <th>DIRECTORS:</th>
+                            <td>
+                                {{#each data.directors}}
+                                    <span class="PG">
+                                        {{this}}
+                                    </span>
+                                {{/each}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>CAST:</th>
+                            <td>
+                                <table>
+                                    {{#each data.cast}}
+                                        <span class="PG">
+                                            {{this}}
+                                        </span>
+                                    {{/each}}
+                                </table>
+                                
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>LANGUAGES:</th>
+                            <td>
+                                {{#each data.languages}}
+                                    <span class="PG">
+                                        {{this}}
+                                    </span>
+                                {{/each}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>COUNTRIES:</th>
+                            <td>
+                                {{#each data.countries}}
+                                    <span class="PG">
+                                        {{this}}
+                                    </span>
+                                {{/each}}
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <hr>
+                <div class="social-btn">
+                    <i class="fa fa-trophy"></i>&nbsp<b>AWARDS</b><br>
+                    <br>
+                    <b>WINS: {{data.awards.wins}} </b>&nbsp <br>
+                    <b>NOMINATION: {{data.awards.nominations}}</b>&nbsp
+                </div>
+               
+
+            </div>
+        </div>
+
+        <div class="card_right">
+            <div class="img_container">
+
+                {{#if data.poster }}
+                    <img src="{{data.poster}}" alt="">
+                {{/if}}
+
+                {{#unless data.poster }}
+                    <img src="/images/default_poster.jpg" alt="">
+                {{/unless}}
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

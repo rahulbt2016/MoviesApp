@@ -101,7 +101,7 @@
 
     {{#each data}}
             <article class="postcard light blue">
-                <a class="postcard__img_link" href="#">
+                <a class="postcard__img_link" href="/movieDetails/{{this._id}}">
                     {{#if this.poster }}
                         <img class="postcard__img" src={{ this.poster }}  style="width: 240px; height: 350px"/>
                     {{/if}}
@@ -112,7 +112,7 @@
                     
                 </a>
                 <div class="postcard__text t-dark">
-                    <h1 class="postcard__title blue"><a href="/api/movies/{{this._id}}">{{ this.title }}</a></h1>
+                    <h1 class="postcard__title blue"><a href="/movieDetails/{{this._id}}">{{ this.title }}</a></h1>
                     <div class="postcard__subtitle small">
                         <time datetime="2020-05-25 12:00:00">
                             <i class="fa fa-calendar"></i>

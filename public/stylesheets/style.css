@@ -400,6 +400,9 @@ width: 100px;
 .badge {
     background-color: blue;
 }
+.badge1 {
+    background-color: red;
+}
 
 #search-movie-btn {
     margin-left: -25px;
@@ -441,4 +444,130 @@ div.viewer{
   height: 15%; 
   width: 15%
 }
+.btn-primary{
+    margin-left: 20px;
+}
+.main_card {
+    color: #bd150b;
+    width: auto;
+    height: auto;
+    margin: 50px auto;
+    display: -webkit-box;
 
+    display: flex;
+    max-width: 1100px;
+    background: #00C9FF; 
+    background: -webkit-linear-gradient(to right, #92FE9D, #00C9FF);
+    background: -webkit-gradient(linear, left top, right top, from(#92FE9D), to(#00C9FF));
+    background: -webkit-linear-gradient(left, #92FE9D, #00C9FF);
+    background: -o-linear-gradient(left, #92FE9D, #00C9FF);
+    background: linear-gradient(to right, #92FE9D, #00C9FF); 
+    -webkit-box-shadow: 0 0 40px rgba(0,0,0,0.3); 
+            box-shadow: 0 0 40px rgba(0,0,0,0.3);
+  }
+  
+  .card_left {
+    width: 90%;
+  }
+  hr{
+      margin: 0px;
+  }
+  .card_datails {
+    width: 90%;
+    padding: 30px;
+    margin-top: -25px;
+  }
+  .card_datails  h1 {
+    font-size: 50px;
+  }
+  .card_right img {
+    height: 390px;
+    border-radius: 2px;
+  }
+  .card_right {
+    border-radius: 2px;
+  }
+  
+  .card_cat {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: inline;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  
+    .year, .time, .rated {
+    color: fff;
+    display: inline;
+    padding: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+    margin-left: 0px;
+    font-size: 13px
+  }
+
+  .id, .rating, .votes ,.dvd, .votes, .reviews ,.meter{
+    color: fff;
+    display: inline;
+    padding: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+    margin-left: 0px;
+    font-size: 13px
+  }
+  .genre{
+    color: fff;
+    display: flex;
+    position: relative;
+    padding: 20px;
+    font-weight: bold;
+    margin: 0px;
+    font-size: 13px;;
+  }
+
+  .fa-award{
+    font-size:20px;
+    color: darkred
+  }
+  .fa-imdb{
+    font-size:20px;
+    color: darkred
+  }
+  #tomatoes-img {
+    height: 16px;
+    width: 16px;
+}
+  
+  .PG {
+    color: fff;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 15px;
+    margin: 0px;
+      display: inline;
+    background: #92FE9D;
+    -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.1);
+            box-shadow: 0 0 50px rgba(0,0,0,0.1);
+    -webkit-transition: 300ms ease-in-out;
+    
+    margin-bottom: 200px;
+  }
+  
+  .disc {
+    font-weight: 100;
+    line-height: 27px;
+  }
+  
+  .social-btn {
+    margin-left: -10px;
+    width: 90%;
+    padding: 20px;
+  }
+
+  td {
+
+    padding: 10px;
+  }
+ 

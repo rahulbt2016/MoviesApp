@@ -11,13 +11,13 @@
         <input type="text" class="form-control" name="plot" placeholder="Enter movie plot" value="{{data.plot}}">
         <br>
         <label for="fullplot">Movie Fullplot:</label>
-        <input type="text" class="form-control" name="fullplot" placeholder="Enter movie fullplot" value="{{data.fullplot}}">
+        <textarea rows="6" type="text" class="form-control" name="fullplot" placeholder="Enter movie fullplot" value="{{data.fullplot}}"></textarea>
         <br>
         <label for="poster">Movie Poster:</label>
         <input type="text" class="form-control" name="poster" placeholder="Enter movie poster" value="{{data.poster}}">
         <br>
         <label for="genres">Genres:</label>
-        <select id="choices-multiple-remove-button" name="genres" placeholder="Select upto 5 genres" multiple >
+        <select id="choices-multiple-remove-button" name="genres" placeholder="Select genres" multiple >
             <script>
                 let genres = "{{data.genres}}";
                 genres = genres.split(",")
@@ -61,7 +61,7 @@
         <input type="number" class="form-control" name="metacritic" placeholder="Enter movie metacritic" value="{{data.metacritic}}">
         <br>
         <label for="countries">Countries:</label>
-        <select id="choices-multiple-remove-button" name="countries" placeholder="Select upto 5 countries" multiple>
+        <select id="choices-multiple-remove-button" name="countries" placeholder="Select countries" multiple>
 
             <script>
                 let countries = "{{data.countries}}";
@@ -127,7 +127,7 @@
         </select>
 
         <label for="languanges">Languages:</label>
-        <select id="choices-multiple-remove-button" name="languages" placeholder="Select upto 5 languages" multiple>
+        <select id="choices-multiple-remove-button" name="languages" placeholder="Select languages" multiple>
             <script>
                 let languanges = "{{data.languages}}";
                 languanges = languanges.split(",")

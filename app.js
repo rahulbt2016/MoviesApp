@@ -267,11 +267,11 @@ app.get('/addMovie', (req, res) => {
 //Render Update Movie Form
 app.get('/updateMovie/:id', (req, res) => {
 	let id = req.params.id;
-	Movie.findById(id, function(err, book) {
+	Movie.findById(id, function(err, movie) {
 		if (err)
 			res.render('error', { title: 'Error', message:'Something went wrong! Please try again later' });
  
-		res.render('updateMovieForm', {title: "Movies App - Update Movie", data: JSON.parse(JSON.stringify(book))});
+		res.render('updateMovieForm', {title: "Movies App - Update Movie", data: JSON.parse(JSON.stringify(movie))});
 	});
 });
 
@@ -317,10 +317,21 @@ app.get('/', function(req, res) {
 		})
 		.catch(function (err) {
 			console.log("Unable to fetch -", err);
-			res.render('error', { title: 'Error', message:err });
+			res.render('error', { title: 'Error', message:'Something went wrong! Please try again later' });
 		});
 	});
 
+});
+
+//Render Movie Details Page
+app.get('/movieDetails/:id', (req, res) => {
+	let id = req.params.id;
+	Movie.findById(id, function(err, movie) {
+		if (err)
+			res.render('error.hbs', { title: 'Error', message:'Something went wrong! Please try again later' } );
+ 
+		res.render('movieDetails', {title: "Movies App - Movie Details", data: JSON.parse(JSON.stringify(movie))});
+	});
 });
 
 //Wrong route
