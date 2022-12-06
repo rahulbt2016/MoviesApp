@@ -50,7 +50,7 @@
                         {{/if}}
 
                         {{#unless data.tomatoes.dvd }}
-                        -
+                        NA
                         {{/unless}}
                         
                     </span>
@@ -68,24 +68,37 @@
                         <tr>
                             <th>DIRECTORS:</th>
                             <td>
-                                {{#each data.directors}}
-                                    <span class="PG">
-                                        {{this}}
-                                    </span>
-                                {{/each}}
+                                <b>
+                                    <script>
+                                        let directors = [];
+                                        {{#each data.directors}}
+                                            directors.push("{{this}}")
+                                        {{/each}}
+                                        
+                                        directors = directors.join(" | ");
+
+                                        document.write(directors);
+                                    </script>
+                                </b>
+                                
                             </td>
                         </tr>
 
                         <tr>
                             <th>CAST:</th>
                             <td>
-                                <table>
-                                    {{#each data.cast}}
-                                        <span class="PG">
-                                            {{this}}
-                                        </span>
-                                    {{/each}}
-                                </table>
+                                <b>
+                                    <script>
+                                        let cast = [];
+                                        {{#each data.cast}}
+                                            cast.push("{{this}}")
+                                        {{/each}}
+                                        
+                                        cast = cast.join(" | ");
+
+                                        document.write(cast);
+                                    </script>
+                                </b>
                                 
                             </td>
                         </tr>
@@ -93,22 +106,38 @@
                         <tr>
                             <th>LANGUAGES:</th>
                             <td>
-                                {{#each data.languages}}
-                                    <span class="PG">
-                                        {{this}}
-                                    </span>
-                                {{/each}}
+                                <b>
+                                    <script>
+                                        let languages = [];
+                                        {{#each data.languages}}
+                                            languages.push("{{this}}")
+                                        {{/each}}
+                                        
+                                        languages = languages.join(" | ");
+
+                                        document.write(languages);
+                                    </script>
+                                </b>
+                                
                             </td>
                         </tr>
 
                         <tr>
                             <th>COUNTRIES:</th>
                             <td>
-                                {{#each data.countries}}
-                                    <span class="PG">
-                                        {{this}}
-                                    </span>
-                                {{/each}}
+                                <b>
+                                    <script>
+                                        let countries = [];
+                                        {{#each data.countries}}
+                                            countries.push("{{this}}")
+                                        {{/each}}
+                                        
+                                        countries = countries.join(" | ");
+
+                                        document.write(countries);
+                                    </script>
+                                </b>
+                                
                             </td>
                         </tr>
                     </table>
