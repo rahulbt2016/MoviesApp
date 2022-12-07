@@ -47,7 +47,7 @@ mongoose.connect(database.url)
 var Movie = require('./models/movie');
 var User = require('./models/user');
 
-var accessToken = "";
+//var accessToken = "";
 
 const { title } = require('process');
 
@@ -377,12 +377,12 @@ app.get('/', function(req, res) {
 		else 
 			url = "https" + url;
 		
+		/*
 		//Headers with the JWT
 		let myHeaders =  new fetch.Headers()
 		myHeaders.append('Content-Type','application/json; charset=utf-8');
 		myHeaders.append('Authorization', 'Bearer ' + accessToken);
-
-
+		*/
 		
 		fetch(url, 
 			{headers: myHeaders})	//Sending JWT with the fetch request
