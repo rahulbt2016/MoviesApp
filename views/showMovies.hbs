@@ -1,3 +1,7 @@
+{{#if loggedIn}}
+    <h3 class="hello-msg">Hello {{loggedIn.name}}!</h3>
+{{/if}}
+
 <div class="container">
     <form class="search-form">
         <div class="row">
@@ -88,6 +92,7 @@
             </div>
 
             <div class="col-md-1">
+                
                 <button type="button" class="btn btn-primary" id="add-movie-btn">
                     <i class="fa fa-plus"> Add Movie</i>
                 </button>
@@ -141,7 +146,7 @@
                     </div>
                     <div class="postcard__bar"></div>
                     <div class="postcard__preview-txt">{{this.fullplot}}</div>
-                    <ul class="postcard__tagbox">
+                    <ul class="postcard__tagbox action-btns">
                         
                         <li class="tag__item play blue">
                             <a class="update-movie-btn"><p hidden>{{this._id}}</p><i class="fa fa-pencil"></i><span> Update</span></a>
@@ -155,6 +160,15 @@
             </article>
     {{/each}}
 </div>
+
+<script>
+    let loggedInUser = "{{loggedIn}}";
+    
+    if(!loggedInUser) {
+        $("#add-movie-btn").hide();
+        $(".action-btns").html("");
+    }
+</script>
 
 
 

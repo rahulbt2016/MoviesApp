@@ -33,6 +33,15 @@
   <body>
     <header>
       <a href="/"><img src="/images/logo2.png" id="logo-img"></a>
+      
+      {{#if loggedIn}}
+        <a href="/logout" id="logout-btn" title="Logout"><i class="fa fa-sign-out"></i></a>
+      {{/if}}
+
+      {{#unless loggedIn}}
+        <a href="/login" id="login-btn" title="Login"><i class="fa fa-sign-in"></i></a>
+      {{/unless}}
+      
       <img src="/images/movies.png" id="movies-img">
       <h1>Movies App</h1>
       <h4><i>Great Movies Start With Us!</i></h4>

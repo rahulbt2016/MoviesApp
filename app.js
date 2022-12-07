@@ -3,17 +3,27 @@ var mongoose = require('mongoose');
 var app      = express();
 var database = require('./config/database');
 var bodyParser = require('body-parser');         // pull information from HTML POST (express4)
+var sessions = require('express-session');
 
 
 // Import path module, to work with file and directory paths
 var path = require('path');
 //Add Express-Handlebars (template engine) to the project
 const exphbs = require('express-handlebars');
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken');
 //Set root folder for serving static assets
 app.use(express.static(path.join(__dirname, 'public')));
 // Initialize built-in middleware for urlencoding and json
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+app.use(sessions({
+    secret: process.env.SESSION_SECRET_KEY,
+    saveUninitialized:true,
+    resave: false 
+}));
+
 
 const fetch = require('cross-fetch');
 
@@ -35,7 +45,60 @@ mongoose.connect(database.url)
 .catch((err) => {console.log(err)})
 
 var Movie = require('./models/movie');
+var User = require('./models/user');
+
+var accessToken = "";
+
 const { title } = require('process');
+
+/*
+//Middleware to let user login
+function login(req, res, next) {
+
+	User.findOne({email : loginCredentials.email}, async (err, user) => {
+		
+		if (user) {
+			if( await bcrypt.compare(loginCredentials.password, user.password)) {
+				
+				accessToken = jwt.sign({name : user.name, email: user.email, password: user.password}, process.env.ACCESS_TOKEN_SECRET);
+				
+				next();
+			}
+			else {
+				res.render('error', {title: "Error", message: "Incorrect Password"});
+			}
+		}
+		else {
+			res.render('error', {title: "Error", message: "User not found!"});
+		}
+	})
+}
+
+//Middleware to Authenticate the token
+function authenticateToken(req, res, next) {
+
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(" ")[1]
+
+    if(token == null) return res.render('error', {title: "Error", message: "Access Forbidden!"});
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+
+        if(err) return res.render('error', {title: "Error", message: "Access Forbidden!"});
+        req.user = user
+        next()
+    })
+}
+*/
+
+//Middleware that checks if user is logged in
+function authorizeUser(req, res, next) {
+
+	if(req.session.user)
+		next();
+	else 
+		res.redirect("/login");
+}
 
  
 //get all movies data from db
@@ -86,7 +149,7 @@ app.get('/api/movies/:id', function(req, res) {
 });
 
 //Insert a new movie to the db
-app.post('/api/movies', function(req, res) {
+app.post('/api/movies',  function(req, res) {
 	
 	let genres, cast, languages, countries, directors, writers;
 
@@ -164,8 +227,9 @@ app.post('/api/movies', function(req, res) {
 	});
 });
 
+//Create mongose method to update an existing record into collection
 app.put('/api/movies/:Id', function(req, res) {
-	// create mongose method to update an existing record into collection
+	
 	let genres, cast, languages, countries, directors, writers;
 
 	if(req.body.genres)
@@ -247,7 +311,7 @@ app.put('/api/movies/:Id', function(req, res) {
 
 
 
-app.delete('/api/movies/:Id',function(req,res)
+app.delete('/api/movies/:Id', function(req,res)
 {
     Movie.findByIdAndRemove({_id:req.params.Id}).then(function(result)
     {
@@ -258,10 +322,15 @@ app.delete('/api/movies/:Id',function(req,res)
 
 });
 
-//Render Insert Movie Form
-app.get('/addMovie', (req, res) => {
 
-	res.render('addMovieForm', {title: "Movies App - Add Movie"});
+
+
+
+
+//Render Insert Movie Form
+app.get('/addMovie', authorizeUser, (req, res) => {
+
+	res.render('addMovieForm', {title: "Movies App - Add Movie", loggedIn: req.session.user});
 });
 
 //Render Update Movie Form
@@ -271,7 +340,7 @@ app.get('/updateMovie/:id', (req, res) => {
 		if (err)
 			res.render('error', { title: 'Error', message:'Something went wrong! Please try again later' });
  
-		res.render('updateMovieForm', {title: "Movies App - Update Movie", data: JSON.parse(JSON.stringify(movie))});
+		res.render('updateMovieForm', {title: "Movies App - Update Movie", data: JSON.parse(JSON.stringify(movie)), loggedIn: req.session.user});
 	});
 });
 
@@ -307,17 +376,24 @@ app.get('/', function(req, res) {
 			url = "http" + url;
 		else 
 			url = "https" + url;
+		
+		//Headers with the JWT
+		let myHeaders =  new fetch.Headers()
+		myHeaders.append('Content-Type','application/json; charset=utf-8');
+		myHeaders.append('Authorization', 'Bearer ' + accessToken);
+
 
 		
-		fetch(url)
+		fetch(url, 
+			{headers: myHeaders})	//Sending JWT with the fetch request
 		.then((response) => response.json())
 		.then((jsonData) => {
 			
-			res.render('showMovies', {data: jsonData, totalPages: (Math.ceil(count/perPage) - 1)});
+			res.render('showMovies', {data: jsonData, totalPages: (Math.ceil(count/perPage) - 1), loggedIn: req.session.user});
 		})
 		.catch(function (err) {
 			console.log("Unable to fetch -", err);
-			res.render('error', { title: 'Error', message:'Something went wrong! Please try again later' });
+			res.render('error', { title: 'Error', message: "Access Denied!" });
 		});
 	});
 
@@ -330,9 +406,47 @@ app.get('/movieDetails/:id', (req, res) => {
 		if (err)
 			res.render('error.hbs', { title: 'Error', message:'Something went wrong! Please try again later' } );
  
-		res.render('movieDetails', {title: "Movies App - Movie Details", data: JSON.parse(JSON.stringify(movie))});
+		res.render('movieDetails', {title: "Movies App - Movie Details", data: JSON.parse(JSON.stringify(movie)), loggedIn: req.session.user});
 	});
 });
+
+//Render Login Page
+app.get('/login', function(req, res) {
+	res.render('login', {layout: false, loggedIn: req.session.user});   //Render login.hbs
+});
+
+app.post('/loginUser', function(req, res) {
+
+	let email = req.body.email;
+	let password = req.body.password;
+
+
+	User.findOne({email : email}, async (err, user) => {
+		
+		if (user) {
+			if( await bcrypt.compare(password, user.password)) {
+				
+				//accessToken = jwt.sign({name : user.name, email: user.email, password: user.password}, process.env.ACCESS_TOKEN_SECRET);
+				req.session.user = user;
+				res.redirect("/");
+			}
+			else {
+				res.render('error', {title: "Error", message: "Incorrect Password"});
+			}
+		}
+		else {
+			res.render('error', {title: "Error", message: "User not found!"});
+		}
+	})
+
+});
+
+app.get('/logout', function(req, res) {
+
+	req.session.destroy();
+	res.redirect("/");
+});
+
 
 //Wrong route
 app.get('*', function(req, res) {
