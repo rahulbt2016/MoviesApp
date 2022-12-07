@@ -384,8 +384,7 @@ app.get('/', function(req, res) {
 		myHeaders.append('Authorization', 'Bearer ' + accessToken);
 		*/
 		
-		fetch(url, 
-			{headers: myHeaders})	//Sending JWT with the fetch request
+		fetch(url)	//Sending JWT with the fetch request
 		.then((response) => response.json())
 		.then((jsonData) => {
 			
