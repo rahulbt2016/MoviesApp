@@ -11,7 +11,7 @@ var path = require('path');
 //Add Express-Handlebars (template engine) to the project
 const exphbs = require('express-handlebars');
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken');
+//const jwt = require('jsonwebtoken');
 //Set root folder for serving static assets
 app.use(express.static(path.join(__dirname, 'public')));
 // Initialize built-in middleware for urlencoding and json
