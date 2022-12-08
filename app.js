@@ -139,11 +139,11 @@ app.get('/api/movies', function(req, res) {
 // get a movie from db by its id
 app.get('/api/movies/:id', function(req, res) {
 	let id = req.params.id;
-	Movie.findById(id, function(err, book) {
+	Movie.findById(id, function(err, movie) {
 		if (err)
 			res.send(err)
  
-		res.json(book);
+		res.json(movie);
 	});
  
 });
@@ -310,7 +310,7 @@ app.put('/api/movies/:Id', function(req, res) {
 });
 
 
-
+//Delete record
 app.delete('/api/movies/:Id', function(req,res)
 {
     Movie.findByIdAndRemove({_id:req.params.Id}).then(function(result)
