@@ -21,7 +21,8 @@ app.use(express.json());
 app.use(sessions({
     secret: process.env.SESSION_SECRET_KEY,
     saveUninitialized:true,
-    resave: false 
+    resave: false,
+	maxAge: Date.now() + (30 * 86400 * 1000)
 }));
 
 
